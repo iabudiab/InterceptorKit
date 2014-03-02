@@ -1,15 +1,15 @@
 //
-//  IKProxy.m
+//  IKInterceptor.m
 //  InterceptorKit
 //
 //  Created by Iska on 02/03/14.
 //  Copyright (c) 2014 BrainCookie. All rights reserved.
 //
 
-#import "IKProxy.h"
+#import "IKInterceptor.h"
 #import "IKInterceptionContext.h"
 
-@interface IKProxy ()
+@interface IKInterceptor ()
 {
 	id _target;
 	NSMutableArray *_preInvokeInterceptors;
@@ -18,13 +18,13 @@
 
 @end
 
-@implementation IKProxy
+@implementation IKInterceptor
 
 #pragma mark - Lifecycle
 
-+ (IKProxy *)interceptorForTarget:(id)target
++ (IKInterceptor *)interceptorForTarget:(id)target
 {
-	return [[IKProxy alloc] initWithTarget:target];
+	return [[IKInterceptor alloc] initWithTarget:target];
 }
 
 - (id)initWithTarget:(id)target

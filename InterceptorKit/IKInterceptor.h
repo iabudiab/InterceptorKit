@@ -1,5 +1,5 @@
 //
-//  IKProxy.h
+//  IKInterceptor.h
 //  InterceptorKit
 //
 //  Created by Iska on 02/03/14.
@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "IntercetptorKitTypes.h"
 
-@interface IKProxy : NSProxy
+@interface IKInterceptor : NSProxy
 
-+ (IKProxy *)interceptorForTarget:(id)target;
++ (IKInterceptor *)interceptorForTarget:(id)target;
 
 - (id)initWithTarget:(id)target;
 

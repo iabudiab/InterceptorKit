@@ -32,11 +32,11 @@
 	NSMutableString *testString = [NSMutableString stringWithString:@"InterceptorKit"];
 	NSInteger length = [testString length];
 
-    NSMutableString *interceptor = (NSMutableString *)[[IKProxy alloc] initWithTarget:testString];
+    NSMutableString *interceptor = (NSMutableString *)[[IKInterceptor alloc] initWithTarget:testString];
 
 	__block NSInteger count = 0;
 
-	[(IKProxy *)interceptor interceptSelector:@selector(appendFormat:)
+	[(IKInterceptor *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModePreInvoke
 									andAction:^(id interceptedTarget, SEL interceptedSelector) {
 										count++;
@@ -56,11 +56,11 @@
 	NSMutableString *testString = [NSMutableString stringWithString:@"InterceptorKit"];
 	NSInteger length = [testString length];
 
-    NSMutableString *interceptor = (NSMutableString *)[[IKProxy alloc] initWithTarget:testString];
+    NSMutableString *interceptor = (NSMutableString *)[[IKInterceptor alloc] initWithTarget:testString];
 
 	__block NSInteger count = 0;
 
-	[(IKProxy *)interceptor interceptSelector:@selector(appendFormat:)
+	[(IKInterceptor *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModePostInvoke
 									andAction:^(id interceptedTarget, SEL interceptedSelector) {
 										count++;
@@ -79,11 +79,11 @@
 {
 	NSMutableString *testString = [NSMutableString stringWithString:@"InterceptorKit"];
 
-    NSMutableString *interceptor = (NSMutableString *)[[IKProxy alloc] initWithTarget:testString];
+    NSMutableString *interceptor = (NSMutableString *)[[IKInterceptor alloc] initWithTarget:testString];
 
 	__block NSInteger count = 0;
 
-	[(IKProxy *)interceptor interceptSelector:@selector(appendFormat:)
+	[(IKInterceptor *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModePreInvoke | IKInterceptionModePostInvoke
 									andAction:^(id interceptedTarget, SEL interceptedSelector) {
 										count++;
@@ -100,11 +100,11 @@
 {
 	NSMutableString *testString = [NSMutableString stringWithString:@"InterceptorKit"];
 
-	NSMutableString *interceptor = (NSMutableString *)[[IKProxy alloc] initWithTarget:testString];
+	NSMutableString *interceptor = (NSMutableString *)[[IKInterceptor alloc] initWithTarget:testString];
 
 	__block NSInteger count = 0;
 
-	[(IKProxy *)interceptor interceptSelector:@selector(appendFormat:)
+	[(IKInterceptor *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModeConditional
 									condition:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 										return count < 3;
