@@ -96,5 +96,28 @@
 	XCTAssertTrue(count == 10, @"Interceptor should have been called 10 times");
 }
 
+- (void)testConditionalInterceptor
+{
+	NSMutableString *testString = [NSMutableString stringWithString:@"InterceptorKit"];
+
+	NSMutableString *interceptor = (NSMutableString *)[[IKProxy alloc] initWithTarget:testString];
+
+	__block NSInteger count = 0;
+
+	[(IKProxy *)interceptor interceptSelector:@selector(appendFormat:)
+									 withMode:IKInterceptionModeConditional
+									condition:^BOOL(id interceptedTarget, SEL interceptedSelector) {
+										return count < 3;
+									}
+									andAction:^(id interceptedTarget, SEL interceptedSelector) {
+										count++;
+									}];
+
+	for (int i = 0; i < 5; i++) {
+		[interceptor appendFormat:@"%d", i];
+	}
+
+	XCTAssertTrue(count == 3, @"Interceptor's action should have been run 3 times");
+}
 
 @end
