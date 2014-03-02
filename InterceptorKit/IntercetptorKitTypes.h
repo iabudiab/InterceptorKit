@@ -13,5 +13,5 @@ typedef enum
     IKInterceptionModeConditional    = 1 << 2
 } IKInterceptionMode;
 
-typedef void (^ IKInterceptionAction) (id inteceptedTarget, SEL interceptedSelector);
-typedef BOOL (^ IKInterceptionCondition) (id inteceptedTarget, SEL interceptedSelector);
+typedef void (^ IKInterceptionAction) (id interceptedTarget, SEL interceptedSelector);
+typedef BOOL (^ IKInterceptionCondition) (id intecerptedTarget, SEL interceptedSelector);

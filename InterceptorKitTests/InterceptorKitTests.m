@@ -38,7 +38,7 @@
 
 	[(IKProxy *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModePreInvoke
-									andAction:^(id inteceptedTarget, SEL interceptedSelector) {
+									andAction:^(id interceptedTarget, SEL interceptedSelector) {
 										count++;
 										XCTAssertTrue([testString length] < length + count,
 													  @"PreInvoke Interceptor should have been called beffore appendForamt");
@@ -62,7 +62,7 @@
 
 	[(IKProxy *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModePostInvoke
-									andAction:^(id inteceptedTarget, SEL interceptedSelector) {
+									andAction:^(id interceptedTarget, SEL interceptedSelector) {
 										count++;
 										XCTAssertTrue([testString length] == length + count,
 													  @"PreInvoke Interceptor should have been called after appendForamt");
@@ -85,7 +85,7 @@
 
 	[(IKProxy *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModePreInvoke | IKInterceptionModePostInvoke
-									andAction:^(id inteceptedTarget, SEL interceptedSelector) {
+									andAction:^(id interceptedTarget, SEL interceptedSelector) {
 										count++;
 									}];
 
