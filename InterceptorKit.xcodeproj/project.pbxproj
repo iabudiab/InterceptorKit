@@ -15,6 +15,8 @@
 		62BAD9CF18C3683100508D65 /* InterceptorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BAD9B218C3683100508D65 /* InterceptorKit.framework */; };
 		62BAD9D518C3683100508D65 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62BAD9D318C3683100508D65 /* InfoPlist.strings */; };
 		62BAD9D718C3683100508D65 /* InterceptorKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9D618C3683100508D65 /* InterceptorKitTests.m */; };
+		62BAD9E218C369E900508D65 /* IKProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9E018C369E900508D65 /* IKProxy.h */; };
+		62BAD9E318C369E900508D65 /* IKProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9E118C369E900508D65 /* IKProxy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 		62BAD9D218C3683100508D65 /* InterceptorKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InterceptorKitTests-Info.plist"; sourceTree = "<group>"; };
 		62BAD9D418C3683100508D65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		62BAD9D618C3683100508D65 /* InterceptorKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterceptorKitTests.m; sourceTree = "<group>"; };
+		62BAD9E018C369E900508D65 /* IKProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKProxy.h; sourceTree = "<group>"; };
+		62BAD9E118C369E900508D65 /* IKProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKProxy.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,8 @@
 			children = (
 				62BAD9C218C3683100508D65 /* InterceptorKit.h */,
 				62BAD9C318C3683100508D65 /* InterceptorKit.m */,
+				62BAD9E018C369E900508D65 /* IKProxy.h */,
+				62BAD9E118C369E900508D65 /* IKProxy.m */,
 				62BAD9BC18C3683100508D65 /* Supporting Files */,
 			);
 			path = InterceptorKit;
@@ -151,6 +157,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62BAD9E218C369E900508D65 /* IKProxy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62BAD9E318C369E900508D65 /* IKProxy.m in Sources */,
 				62BAD9C418C3683100508D65 /* InterceptorKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
