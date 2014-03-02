@@ -87,6 +87,8 @@
 				condition:(IKInterceptionCondition)condition
 				andAction:(IKInterceptionAction)action
 {
+	if (mode == IKInterceptionModeConditional) mode |= IKInterceptionModePreInvoke;
+
 	IKInterceptionContext *context = [[IKInterceptionContext alloc] initWithMode:mode
 																	   condition:condition
 																	   andAction:action];
