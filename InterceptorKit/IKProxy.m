@@ -64,10 +64,32 @@
 
 #pragma mark - Interception
 
-- (void)interceptSelector:(SEL)selector withMode:(IKInterceptionMode)mode andBlock:(IKInterceptionBlock)block
+- (void)interceptSelector:(SEL)selector
+			   withAction:(IKInterceptionAction)action
+{
+	[self interceptSelector:selector
+				   withMode:IKInterceptionModePreInvoke | IKInterceptionModePostInvoke
+				  andAction:action];
+}
+
+- (void)interceptSelector:(SEL)selector
+				 withMode:(IKInterceptionMode)mode
+				andAction:(IKInterceptionAction)action
+{
+	[self interceptSelector:selector
+				   withMode:mode
+				  condition:nil
+				  andAction:action];
+}
+
+- (void)interceptSelector:(SEL)selector
+				 withMode:(IKInterceptionMode)mode
+				condition:(IKInterceptionCondition)condition
+				andAction:(IKInterceptionAction)action
 {
 	IKInterceptionContext *context = [[IKInterceptionContext alloc] initWithMode:mode
-																	   andBlock:block];
+																	   condition:condition
+																	   andAction:action];
 	if ([context isPreInvokeInterceptor]) [_preInvokeInterceptors addObject:context];
 	if ([context isPostInvokeInterceptor]) [_postInvokeInterceptors addObject:context];
 }

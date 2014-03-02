@@ -15,6 +15,14 @@
 
 - (id)initWithTarget:(id)target;
 
-- (void)interceptSelector:(SEL)selector withMode:(IKInterceptionMode)mode andBlock:(IKInterceptionBlock)block;
+- (void)interceptSelector:(SEL)selector
+			   withAction:(IKInterceptionAction)action;
+- (void)interceptSelector:(SEL)selector
+				 withMode:(IKInterceptionMode)mode
+				andAction:(IKInterceptionAction)action;
+- (void)interceptSelector:(SEL)selector
+				 withMode:(IKInterceptionMode)mode
+				condition:(IKInterceptionCondition)condition
+				andAction:(IKInterceptionAction)action;
 
 @end

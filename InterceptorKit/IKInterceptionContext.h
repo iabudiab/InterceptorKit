@@ -11,11 +11,14 @@
 
 @interface IKInterceptionContext : NSObject
 
-- (instancetype)initWithMode:(IKInterceptionMode)mode andBlock:(IKInterceptionBlock)block;
+- (instancetype)initWithMode:(IKInterceptionMode)mode
+				   condition:(IKInterceptionCondition)condition
+				   andAction:(IKInterceptionAction)action;
 
 - (void)performInterceptionWithInvocation:(NSInvocation *)invocation;
 
 - (BOOL)isPreInvokeInterceptor;
 - (BOOL)isPostInvokeInterceptor;
+- (BOOL)isConditionalInterceptor;
 
 @end

@@ -11,20 +11,25 @@
 @interface IKInterceptionContext ()
 {
 	IKInterceptionMode _mode;
-	IKInterceptionBlock _block;
+	IKInterceptionAction _action;
+	IKInterceptionCondition _condition;
 }
+
 @end
 
 @implementation IKInterceptionContext
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithMode:(IKInterceptionMode)mode andBlock:(IKInterceptionBlock)block
+- (instancetype)initWithMode:(IKInterceptionMode)mode
+				   condition:(IKInterceptionCondition)condition
+				   andAction:(IKInterceptionAction)action
 {
 	self = [super init];
 	if(self) {
 		_mode = mode;
-		_block = [block copy];
+		_condition = [condition copy];
+		_action = [action copy];
 	}
 	return self;
 }
@@ -33,7 +38,10 @@
 
 - (void)performInterceptionWithInvocation:(NSInvocation *)invocation
 {
-	_block(invocation.target, invocation.selector);
+	if ([self isConditionalInterceptor] && _condition != nil) {
+		if (_condition(invocation.target, invocation.selector) == NO) return;
+	}
+	_action(invocation.target, invocation.selector);
 }
 
 #pragma mark - Attributes
@@ -46,6 +54,11 @@
 - (BOOL)isPostInvokeInterceptor
 {
     return (_mode & IKInterceptionModePostInvoke) == IKInterceptionModePostInvoke;
+}
+
+- (BOOL)isConditionalInterceptor
+{
+	return (_mode & IKInterceptionModeConditional) == IKInterceptionModeConditional;
 }
 
 @end
