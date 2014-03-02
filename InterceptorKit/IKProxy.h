@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IntercetptorKitTypes.h"
 
 @interface IKProxy : NSProxy
 
 + (IKProxy *)interceptorForTarget:(id)target;
 
 - (id)initWithTarget:(id)target;
+
+- (void)interceptSelector:(SEL)selector withMode:(IKInterceptionMode)mode andBlock:(IKInterceptionBlock)block;
 
 @end

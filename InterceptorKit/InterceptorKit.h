@@ -6,8 +6,5 @@
 //  Copyright (c) 2014 BrainCookie. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@interface InterceptorKit : NSObject
-
-@end
+#import "IntercetptorKitTypes.h"
+#import "IKProxy"
