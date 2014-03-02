@@ -7,4 +7,4 @@
 //
 
 #import "IntercetptorKitTypes.h"
-#import "IKProxy"
+#import "IKProxy.h"
