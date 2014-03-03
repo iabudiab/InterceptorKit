@@ -19,6 +19,7 @@
 		62BAD9E618C371D500508D65 /* IntercetptorKitTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9E418C371D500508D65 /* IntercetptorKitTypes.h */; };
 		62BAD9EA18C376F300508D65 /* IKInterceptionContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9E818C376F300508D65 /* IKInterceptionContext.h */; };
 		62BAD9EB18C376F300508D65 /* IKInterceptionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9E918C376F300508D65 /* IKInterceptionContext.m */; };
+		62BD8D5018C4D1C2003C4C7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BD8D4F18C4D1C2003C4C7F /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +31,18 @@
 			remoteInfo = InterceptorKit;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		62BD8D4C18C4D1C1003C4C7F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		62BAD9B218C3683100508D65 /* InterceptorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = InterceptorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +64,8 @@
 		62BAD9E418C371D500508D65 /* IntercetptorKitTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntercetptorKitTypes.h; sourceTree = "<group>"; };
 		62BAD9E818C376F300508D65 /* IKInterceptionContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKInterceptionContext.h; sourceTree = "<group>"; };
 		62BAD9E918C376F300508D65 /* IKInterceptionContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKInterceptionContext.m; sourceTree = "<group>"; };
+		62BD8D4E18C4D1C1003C4C7F /* libInterceptorKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libInterceptorKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		62BD8D4F18C4D1C2003C4C7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,14 +87,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		62BD8D4B18C4D1C1003C4C7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62BD8D5018C4D1C2003C4C7F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		62BAD9A818C3683000508D65 = {
 			isa = PBXGroup;
 			children = (
-				62BAD9BB18C3683100508D65 /* InterceptorKit */,
-				62BAD9D018C3683100508D65 /* InterceptorKitTests */,
+				62BAD9BB18C3683100508D65 /* Source Code */,
+				62BAD9D018C3683100508D65 /* Tests */,
 				62BAD9B418C3683100508D65 /* Frameworks */,
 				62BAD9B318C3683100508D65 /* Products */,
 			);
@@ -90,6 +113,7 @@
 			children = (
 				62BAD9B218C3683100508D65 /* InterceptorKit.framework */,
 				62BAD9C918C3683100508D65 /* InterceptorKitTests.xctest */,
+				62BD8D4E18C4D1C1003C4C7F /* libInterceptorKit.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,6 +123,7 @@
 			children = (
 				62BAD9B518C3683100508D65 /* Cocoa.framework */,
 				62BAD9CA18C3683100508D65 /* XCTest.framework */,
+				62BD8D4F18C4D1C2003C4C7F /* Foundation.framework */,
 				62BAD9B718C3683100508D65 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -114,7 +139,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		62BAD9BB18C3683100508D65 /* InterceptorKit */ = {
+		62BAD9BB18C3683100508D65 /* Source Code */ = {
 			isa = PBXGroup;
 			children = (
 				62BAD9C218C3683100508D65 /* InterceptorKit.h */,
@@ -125,6 +150,7 @@
 				62BAD9E918C376F300508D65 /* IKInterceptionContext.m */,
 				62BAD9BC18C3683100508D65 /* Supporting Files */,
 			);
+			name = "Source Code";
 			path = InterceptorKit;
 			sourceTree = "<group>";
 		};
@@ -138,12 +164,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		62BAD9D018C3683100508D65 /* InterceptorKitTests */ = {
+		62BAD9D018C3683100508D65 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				62BAD9D618C3683100508D65 /* InterceptorKitTests.m */,
 				62BAD9D118C3683100508D65 /* Supporting Files */,
 			);
+			name = Tests;
 			path = InterceptorKitTests;
 			sourceTree = "<group>";
 		};
@@ -208,6 +235,23 @@
 			productReference = 62BAD9C918C3683100508D65 /* InterceptorKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		62BD8D4D18C4D1C1003C4C7F /* InterceptorKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 62BD8D6C18C4D1C2003C4C7F /* Build configuration list for PBXNativeTarget "InterceptorKit" */;
+			buildPhases = (
+				62BD8D4A18C4D1C1003C4C7F /* Sources */,
+				62BD8D4B18C4D1C1003C4C7F /* Frameworks */,
+				62BD8D4C18C4D1C1003C4C7F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InterceptorKit;
+			productName = InterceptorKit;
+			productReference = 62BD8D4E18C4D1C1003C4C7F /* libInterceptorKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -234,6 +278,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				62BD8D4D18C4D1C1003C4C7F /* InterceptorKit */,
 				62BAD9B118C3683100508D65 /* InterceptorKitFramework */,
 				62BAD9C818C3683100508D65 /* InterceptorKitTests */,
 			);
@@ -274,6 +319,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				62BAD9D718C3683100508D65 /* InterceptorKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		62BD8D4A18C4D1C1003C4C7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +497,43 @@
 			};
 			name = Release;
 		};
+		62BD8D6D18C4D1C2003C4C7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				DSTROOT = /tmp/InterceptorKit.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "InterceptorKit/InterceptorKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		62BD8D6E18C4D1C2003C4C7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				DSTROOT = /tmp/InterceptorKit.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "InterceptorKit/InterceptorKit-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -474,6 +563,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		62BD8D6C18C4D1C2003C4C7F /* Build configuration list for PBXNativeTarget "InterceptorKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62BD8D6D18C4D1C2003C4C7F /* Debug */,
+				62BD8D6E18C4D1C2003C4C7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
