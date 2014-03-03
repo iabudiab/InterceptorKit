@@ -523,7 +523,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = InterceptorKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -539,7 +539,7 @@
 				GCC_PREFIX_HEADER = "InterceptorKit/InterceptorKit-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = InterceptorKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
