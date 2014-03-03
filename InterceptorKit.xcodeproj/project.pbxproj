@@ -21,6 +21,11 @@
 		62BAD9EB18C376F300508D65 /* IKInterceptionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9E918C376F300508D65 /* IKInterceptionContext.m */; };
 		62BD8D5018C4D1C2003C4C7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BD8D4F18C4D1C2003C4C7F /* Foundation.framework */; };
 		62BD8D7318C4D3E0003C4C7F /* InterceptorKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9C218C3683100508D65 /* InterceptorKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		62BD8D7418C4D4AE003C4C7F /* IKInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9E118C369E900508D65 /* IKInterceptor.m */; };
+		62BD8D7518C4D4B0003C4C7F /* IKInterceptionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9E918C376F300508D65 /* IKInterceptionContext.m */; };
+		62BD8D7618C4D57C003C4C7F /* InterceptorKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62BAD9C218C3683100508D65 /* InterceptorKit.h */; };
+		62BD8D7718C4D57C003C4C7F /* IntercetptorKitTypes.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62BAD9E418C371D500508D65 /* IntercetptorKitTypes.h */; };
+		62BD8D7818C4D57C003C4C7F /* IKInterceptor.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62BAD9E018C369E900508D65 /* IKInterceptor.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,9 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				62BD8D7618C4D57C003C4C7F /* InterceptorKit.h in CopyFiles */,
+				62BD8D7718C4D57C003C4C7F /* IntercetptorKitTypes.h in CopyFiles */,
+				62BD8D7818C4D57C003C4C7F /* IKInterceptor.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +336,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62BD8D7418C4D4AE003C4C7F /* IKInterceptor.m in Sources */,
+				62BD8D7518C4D4B0003C4C7F /* IKInterceptionContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
