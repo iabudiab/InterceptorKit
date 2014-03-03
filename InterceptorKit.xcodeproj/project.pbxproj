@@ -172,9 +172,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		62BAD9B118C3683100508D65 /* InterceptorKit */ = {
+		62BAD9B118C3683100508D65 /* InterceptorKitFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 62BAD9DA18C3683100508D65 /* Build configuration list for PBXNativeTarget "InterceptorKit" */;
+			buildConfigurationList = 62BAD9DA18C3683100508D65 /* Build configuration list for PBXNativeTarget "InterceptorKitFramework" */;
 			buildPhases = (
 				62BAD9AD18C3683100508D65 /* Sources */,
 				62BAD9AE18C3683100508D65 /* Frameworks */,
@@ -185,7 +185,7 @@
 			);
 			dependencies = (
 			);
-			name = InterceptorKit;
+			name = InterceptorKitFramework;
 			productName = InterceptorKit;
 			productReference = 62BAD9B218C3683100508D65 /* InterceptorKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -234,7 +234,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				62BAD9B118C3683100508D65 /* InterceptorKit */,
+				62BAD9B118C3683100508D65 /* InterceptorKitFramework */,
 				62BAD9C818C3683100508D65 /* InterceptorKitTests */,
 			);
 		};
@@ -282,7 +282,7 @@
 /* Begin PBXTargetDependency section */
 		62BAD9CE18C3683100508D65 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 62BAD9B118C3683100508D65 /* InterceptorKit */;
+			target = 62BAD9B118C3683100508D65 /* InterceptorKitFramework */;
 			targetProxy = 62BAD9CD18C3683100508D65 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -385,7 +385,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InterceptorKit/InterceptorKit-Prefix.pch";
 				INFOPLIST_FILE = "InterceptorKit/InterceptorKit-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = InterceptorKit;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -400,7 +400,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "InterceptorKit/InterceptorKit-Prefix.pch";
 				INFOPLIST_FILE = "InterceptorKit/InterceptorKit-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = InterceptorKit;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -457,7 +457,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		62BAD9DA18C3683100508D65 /* Build configuration list for PBXNativeTarget "InterceptorKit" */ = {
+		62BAD9DA18C3683100508D65 /* Build configuration list for PBXNativeTarget "InterceptorKitFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				62BAD9DB18C3683100508D65 /* Debug */,
