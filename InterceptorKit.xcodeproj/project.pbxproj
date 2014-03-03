@@ -14,12 +14,13 @@
 		62BAD9CF18C3683100508D65 /* InterceptorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BAD9B218C3683100508D65 /* InterceptorKit.framework */; };
 		62BAD9D518C3683100508D65 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62BAD9D318C3683100508D65 /* InfoPlist.strings */; };
 		62BAD9D718C3683100508D65 /* InterceptorKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9D618C3683100508D65 /* InterceptorKitTests.m */; };
-		62BAD9E218C369E900508D65 /* IKInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9E018C369E900508D65 /* IKInterceptor.h */; };
+		62BAD9E218C369E900508D65 /* IKInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9E018C369E900508D65 /* IKInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62BAD9E318C369E900508D65 /* IKInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9E118C369E900508D65 /* IKInterceptor.m */; };
-		62BAD9E618C371D500508D65 /* IntercetptorKitTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9E418C371D500508D65 /* IntercetptorKitTypes.h */; };
+		62BAD9E618C371D500508D65 /* IntercetptorKitTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9E418C371D500508D65 /* IntercetptorKitTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		62BAD9EA18C376F300508D65 /* IKInterceptionContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9E818C376F300508D65 /* IKInterceptionContext.h */; };
 		62BAD9EB18C376F300508D65 /* IKInterceptionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAD9E918C376F300508D65 /* IKInterceptionContext.m */; };
 		62BD8D5018C4D1C2003C4C7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BD8D4F18C4D1C2003C4C7F /* Foundation.framework */; };
+		62BD8D7318C4D3E0003C4C7F /* InterceptorKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BAD9C218C3683100508D65 /* InterceptorKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,9 +191,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62BAD9EA18C376F300508D65 /* IKInterceptionContext.h in Headers */,
+				62BD8D7318C4D3E0003C4C7F /* InterceptorKit.h in Headers */,
 				62BAD9E618C371D500508D65 /* IntercetptorKitTypes.h in Headers */,
 				62BAD9E218C369E900508D65 /* IKInterceptor.h in Headers */,
+				62BAD9EA18C376F300508D65 /* IKInterceptionContext.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
