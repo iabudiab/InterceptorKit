@@ -145,9 +145,9 @@
 
 	[interceptor argumentsTestSelectorWithInteger:42 dictionary:@{ @"key" : @"obj1" } andStruct:NSMakeRange(3, 9)];
 
-	XCTAssertTrue(_testInteger == 100, @"");
-	XCTAssertEqualObjects(_testDictionary, @{ @"key" : @"obj2" }, @"");
-	XCTAssertTrue(_testRange.location == 0 && _testRange.length == 100, @"");
+	XCTAssertTrue(_testInteger == 100, @"Integer argument should be [100]");
+	XCTAssertEqualObjects(_testDictionary, @{ @"key" : @"obj2" }, @"Dictionary object for key should be [obj2]");
+	XCTAssertTrue(_testRange.location == 0 && _testRange.length == 100, @"Range argument should be [0, 100]");
 }
 
 @end
