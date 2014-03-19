@@ -103,13 +103,13 @@
 		}
 		case '@':
 		{
-			id value;
+			__unsafe_unretained id value;
 			[self getArgument:&value atIndex:index];
 			return value;
 		}
 		case '#':
 		{
-			id value;
+			__unsafe_unretained id value;
 			[self getArgument:&value atIndex:index];
 			return value;
 		}
