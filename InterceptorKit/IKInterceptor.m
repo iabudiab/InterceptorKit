@@ -96,6 +96,13 @@
 	if ([context isPostInvokeInterceptor]) [_postInvokeInterceptors addObject:context];
 }
 
+- (void)interceptArguemntsForSelector:(SEL)selector
+						   withAction:(IKArgumentsInterceptionAction)action
+{
+	IKInterceptionContext *context = [[IKInterceptionContext alloc] initWithArgumentsActions:action];
+	[_preInvokeInterceptors addObject:context];
+}
+
 #pragma mark - Invocation
 
 - (void)forwardInvocation:(NSInvocation *)invocation

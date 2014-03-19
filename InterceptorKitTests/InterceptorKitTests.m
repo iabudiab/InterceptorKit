@@ -10,6 +10,11 @@
 #import "InterceptorKit.h"
 
 @interface InterceptorKitTests : XCTestCase
+{
+	NSInteger _testInteger;
+	NSDictionary *_testDictionary;
+	NSRange _testRange;
+}
 
 @end
 
@@ -25,6 +30,13 @@
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+}
+
+- (void)argumentsTestSelectorWithInteger:(NSInteger)integer dictionary:(NSDictionary *)dictionary andStruct:(NSRange)range
+{
+	_testInteger = integer;
+	_testDictionary = dictionary;
+	_testRange = range;
 }
 
 - (void)testPreInvokeInterceptor
@@ -118,6 +130,24 @@
 	}
 
 	XCTAssertTrue(count == 3, @"Interceptor's action should have been run 3 times");
+}
+
+- (void)testArgumentsInterceptor
+{
+	InterceptorKitTests *interceptor = (InterceptorKitTests *)[[IKInterceptor alloc] initWithTarget:self];
+
+	[(IKInterceptor *)interceptor  interceptArguemntsForSelector:@selector(argumentsTestSelectorWithInteger:dictionary:andStruct:)
+													  withAction:^(id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList) {
+														  [argumentsList replaceObjectAtIndex:0 withObject:@(100)];
+														  [argumentsList replaceObjectAtIndex:1 withObject:@{ @"key" : @"obj2" }];
+														  [argumentsList replaceObjectAtIndex:2 withObject:[NSValue valueWithRange:NSMakeRange(0, 100)]];
+													  }];
+
+	[interceptor argumentsTestSelectorWithInteger:42 dictionary:@{ @"key" : @"obj1" } andStruct:NSMakeRange(3, 9)];
+
+	XCTAssertTrue(_testInteger == 100, @"");
+	XCTAssertEqualObjects(_testDictionary, @{ @"key" : @"obj2" }, @"");
+	XCTAssertTrue(_testRange.location == 0 && _testRange.length == 100, @"");
 }
 
 @end

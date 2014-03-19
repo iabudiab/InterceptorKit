@@ -7,12 +7,14 @@
 //
 
 #import "IKInterceptionContext.h"
+#import "NSInvocation+InterceptorKit.h"
 
 @interface IKInterceptionContext ()
 {
 	IKInterceptionMode _mode;
 	IKInterceptionAction _action;
 	IKInterceptionCondition _condition;
+	IKArgumentsInterceptionAction _argumentsAction;
 }
 
 @end
@@ -34,6 +36,15 @@
 	return self;
 }
 
+- (instancetype)initWithArgumentsActions:(IKArgumentsInterceptionAction)argumentsAction
+{
+	self = [super init];
+	if(self) {
+		_argumentsAction = [argumentsAction copy];
+	}
+	return self;
+}
+
 #pragma mark - Tasks
 
 - (void)performInterceptionWithInvocation:(NSInvocation *)invocation
@@ -41,7 +52,14 @@
 	if ([self isConditionalInterceptor] && _condition != nil) {
 		if (_condition(invocation.target, invocation.selector) == NO) return;
 	}
-	_action(invocation.target, invocation.selector);
+
+	if (_action) {
+		_action(invocation.target, invocation.selector);
+	} else if (_argumentsAction) {
+		NSMutableArray *arguments = [invocation argumentsList];
+		_argumentsAction(invocation.target, invocation.selector, arguments);
+		[invocation setArguments:arguments];
+	}
 }
 
 #pragma mark - Attributes

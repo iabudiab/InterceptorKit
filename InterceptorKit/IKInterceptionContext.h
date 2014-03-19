@@ -15,6 +15,8 @@
 				   condition:(IKInterceptionCondition)condition
 				   andAction:(IKInterceptionAction)action;
 
+- (instancetype)initWithArgumentsActions:(IKArgumentsInterceptionAction)argumentsAction;
+
 - (void)performInterceptionWithInvocation:(NSInvocation *)invocation;
 
 - (BOOL)isPreInvokeInterceptor;

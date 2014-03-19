@@ -24,5 +24,7 @@
 				 withMode:(IKInterceptionMode)mode
 				condition:(IKInterceptionCondition)condition
 				andAction:(IKInterceptionAction)action;
+- (void)interceptArguemntsForSelector:(SEL)selector
+						   withAction:(IKArgumentsInterceptionAction)action;
 
 @end
