@@ -14,5 +14,5 @@ typedef enum
 } IKInterceptionMode;
 
 typedef void (^ IKInterceptionAction) (id interceptedTarget, SEL interceptedSelector);
-typedef BOOL (^ IKInterceptionCondition) (id intecerptedTarget, SEL interceptedSelector);
+typedef BOOL (^ IKInterceptionCondition) (id intercerptedTarget, SEL interceptedSelector);
 typedef void (^ IKArgumentsInterceptionAction) (id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList);
