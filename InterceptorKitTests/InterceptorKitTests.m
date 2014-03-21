@@ -44,20 +44,22 @@
 	NSMutableString *testString = [NSMutableString stringWithString:@"InterceptorKit"];
 	NSInteger length = [testString length];
 
-    NSMutableString *interceptor = (NSMutableString *)[[IKInterceptor alloc] initWithTarget:testString];
+    IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:testString];
 
 	__block NSInteger count = 0;
 
-	[(IKInterceptor *)interceptor interceptSelector:@selector(appendFormat:)
-									 withMode:IKInterceptionModePreInvoke
-									andAction:^(id interceptedTarget, SEL interceptedSelector) {
-										count++;
-										XCTAssertTrue([testString length] < length + count,
-													  @"PreInvoke Interceptor should have been called beffore appendForamt");
-									}];
+	[interceptor interceptSelector:@selector(appendFormat:)
+						  withMode:IKInterceptionModePreInvoke
+						 andAction:^(id interceptedTarget, SEL interceptedSelector) {
+							 count++;
+							 XCTAssertTrue([testString length] < length + count,
+										   @"PreInvoke Interceptor should have been called beffore appendForamt");
+						 }];
+
+	testString = (NSMutableString *)interceptor;
 
 	for (int i = 0; i < 5; i++) {
-		[interceptor appendFormat:@"%d", i];
+		[testString appendFormat:@"%d", i];
 	}
 
 	XCTAssertTrue(count == 5, @"Interceptor should have been called 5 times");
