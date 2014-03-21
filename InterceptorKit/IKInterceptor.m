@@ -45,6 +45,11 @@
 	return [_target isMemberOfClass:aClass];
 }
 
+- (BOOL)isEqual:(id)object
+{
+	return [_target isEqual:object];
+}
+
 #pragma mark - Selector & Protocol
 
 - (BOOL)respondsToSelector:(SEL)aSelector;
