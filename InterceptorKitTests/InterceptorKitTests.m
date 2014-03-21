@@ -152,4 +152,65 @@
 	XCTAssertTrue(_testRange.location == 0 && _testRange.length == 100, @"Range argument should be [0, 100]");
 }
 
+- (void)testExampleStringEncode
+{
+	NSMutableString *someData = [NSMutableString stringWithString:@"InterceptorKit"];
+
+	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:someData];
+	[interceptor interceptSelector:@selector(description)
+						  withMode:IKInterceptionModePreInvoke
+						 andAction:^(id interceptedTarget, SEL interceptedSelector) {
+							 NSData *data = [interceptedTarget dataUsingEncoding: NSUTF8StringEncoding];
+							 [interceptedTarget replaceCharactersInRange:NSMakeRange(0, [interceptedTarget length])
+															  withString:[data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]];
+						 }];
+	someData = (NSMutableString *)interceptor;
+	[someData appendString:@"NotBase64"];
+
+	XCTAssertEqualObjects(someData, @"SW50ZXJjZXB0b3JLaXQ=NotBase64", @"");
+}
+
+- (void)testExampleArraySort
+{
+	NSMutableArray *sortableArray = [NSMutableArray arrayWithObjects:@(9), @(2), nil];
+	NSSortDescriptor *ascendingSort = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+
+	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:sortableArray];
+	[interceptor interceptSelector:@selector(addObject:)
+						  withMode:IKInterceptionModePostInvoke
+						 andAction:^(id interceptedTarget, SEL interceptedSelector) {
+							 [interceptedTarget sortUsingDescriptors:@[ascendingSort]];
+						 }];
+	sortableArray = (NSMutableArray *)interceptor;
+
+	[sortableArray addObject:@(5)];
+	[sortableArray addObject:@(15)];
+	[sortableArray addObject:@(2)];
+	[sortableArray addObject:@(1)];
+
+	for (int i = 0; i < sortableArray.count - 1; i++) {
+		XCTAssertTrue([sortableArray objectAtIndex:i] <= [sortableArray objectAtIndex:i+1], @"Array is not sorted");
+	}
+}
+
+- (void)testExampleLimitArraySize
+{
+	NSMutableArray *words = [NSMutableArray array];
+
+	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:words];
+
+	[interceptor interceptSelector:@selector(addObject:) withMode:IKInterceptionModeConditional condition:^BOOL(id intercerptedTarget, SEL interceptedSelector) {
+		return [intercerptedTarget count] > 3;
+	} andAction:^(id interceptedTarget, SEL interceptedSelector) {
+		[interceptedTarget removeObjectAtIndex:0];
+	}];
+	words = (NSMutableArray *)interceptor;
+
+	[words addObject:@"One"];
+	[words addObject:@"Two"];
+	[words addObject:@"Three"];
+	[words addObject:@"Four"];
+	XCTAssertTrue([words containsObject:@"One"] == NO, @"Word [One] should have been deleted");
+}
+
 @end
