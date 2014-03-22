@@ -157,7 +157,7 @@
 	NSMutableString *someData = [NSMutableString stringWithString:@"InterceptorKit"];
 
 	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:someData];
-	[interceptor interceptSelector:@selector(description)
+	[interceptor interceptSelector:@selector(appendString:)
 						  withMode:IKInterceptionModePreInvoke
 						 andAction:^(id interceptedTarget, SEL interceptedSelector) {
 							 NSData *data = [interceptedTarget dataUsingEncoding: NSUTF8StringEncoding];
@@ -200,7 +200,7 @@
 	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:words];
 
 	[interceptor interceptSelector:@selector(addObject:) withMode:IKInterceptionModeConditional condition:^BOOL(id intercerptedTarget, SEL interceptedSelector) {
-		return [intercerptedTarget count] > 3;
+		return [intercerptedTarget count] >= 3;
 	} andAction:^(id interceptedTarget, SEL interceptedSelector) {
 		[interceptedTarget removeObjectAtIndex:0];
 	}];
