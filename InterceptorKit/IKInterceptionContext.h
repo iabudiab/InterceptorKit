@@ -11,9 +11,13 @@
 
 @interface IKInterceptionContext : NSObject
 
-- (instancetype)initWithMode:(IKInterceptionMode)mode
-				   condition:(IKInterceptionCondition)condition
-				   andAction:(IKInterceptionAction)action;
+- (instancetype)initWithSelector:(SEL)selector
+							mode:(IKInterceptionMode)mode
+					   condition:(IKInterceptionCondition)condition
+					   andAction:(IKInterceptionAction)action;
+
+- (instancetype)initWithSelector:(SEL)selector
+			 andArgumentsActions:(IKArgumentsInterceptionAction)argumentsAction;
 
 - (void)performInterceptionWithInvocation:(NSInvocation *)invocation;
 

@@ -7,12 +7,15 @@
 //
 
 #import "IKInterceptionContext.h"
+#import "NSInvocation+InterceptorKit.h"
 
 @interface IKInterceptionContext ()
 {
+	SEL _selector;
 	IKInterceptionMode _mode;
 	IKInterceptionAction _action;
 	IKInterceptionCondition _condition;
+	IKArgumentsInterceptionAction _argumentsAction;
 }
 
 @end
@@ -21,15 +24,28 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithMode:(IKInterceptionMode)mode
-				   condition:(IKInterceptionCondition)condition
-				   andAction:(IKInterceptionAction)action
+- (instancetype)initWithSelector:(SEL)selector
+							mode:(IKInterceptionMode)mode
+					   condition:(IKInterceptionCondition)condition
+					   andAction:(IKInterceptionAction)action
 {
 	self = [super init];
 	if(self) {
+		_selector = selector;
 		_mode = mode;
 		_condition = [condition copy];
 		_action = [action copy];
+	}
+	return self;
+}
+
+- (instancetype)initWithSelector:(SEL)selector
+			 andArgumentsActions:(IKArgumentsInterceptionAction)argumentsAction
+{
+	self = [super init];
+	if(self) {
+		_selector = selector;
+		_argumentsAction = [argumentsAction copy];
 	}
 	return self;
 }
@@ -38,10 +54,19 @@
 
 - (void)performInterceptionWithInvocation:(NSInvocation *)invocation
 {
+	if (_selector != invocation.selector) return;
+
 	if ([self isConditionalInterceptor] && _condition != nil) {
 		if (_condition(invocation.target, invocation.selector) == NO) return;
 	}
-	_action(invocation.target, invocation.selector);
+
+	if (_action) {
+		_action(invocation.target, invocation.selector);
+	} else if (_argumentsAction) {
+		NSMutableArray *arguments = [invocation argumentsList];
+		_argumentsAction(invocation.target, invocation.selector, arguments);
+		[invocation setArguments:arguments];
+	}
 }
 
 #pragma mark - Attributes
