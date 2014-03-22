@@ -50,10 +50,11 @@
 
 	[interceptor interceptSelector:@selector(appendFormat:)
 						  withMode:IKInterceptionModePreInvoke
-						 andAction:^(id interceptedTarget, SEL interceptedSelector) {
+						 andAction:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 							 count++;
 							 XCTAssertTrue([testString length] < length + count,
 										   @"PreInvoke Interceptor should have been called beffore appendForamt");
+							 return NO;
 						 }];
 
 	testString = (NSMutableString *)interceptor;
@@ -76,10 +77,11 @@
 
 	[(IKInterceptor *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModePostInvoke
-									andAction:^(id interceptedTarget, SEL interceptedSelector) {
+									andAction:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 										count++;
 										XCTAssertTrue([testString length] == length + count,
 													  @"PreInvoke Interceptor should have been called after appendForamt");
+										return NO;
 									}];
 
 	for (int i = 0; i < 5; i++) {
@@ -99,8 +101,9 @@
 
 	[(IKInterceptor *)interceptor interceptSelector:@selector(appendFormat:)
 									 withMode:IKInterceptionModePreInvoke | IKInterceptionModePostInvoke
-									andAction:^(id interceptedTarget, SEL interceptedSelector) {
+									andAction:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 										count++;
+										return NO;
 									}];
 
 	for (int i = 0; i < 5; i++) {
@@ -123,8 +126,9 @@
 									condition:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 										return count < 3;
 									}
-									andAction:^(id interceptedTarget, SEL interceptedSelector) {
+									andAction:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 										count++;
+										return NO;
 									}];
 
 	for (int i = 0; i < 5; i++) {
@@ -134,15 +138,34 @@
 	XCTAssertTrue(count == 3, @"Interceptor's action should have been run 3 times");
 }
 
+- (void)testAbortInvocationInterceptor
+{
+	NSMutableArray *words = [NSMutableArray array];
+
+	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:words];
+
+	[interceptor interceptSelector:@selector(addObject:) withMode:IKInterceptionModeAbortInvoke andAction:^BOOL(id interceptedTarget, SEL interceptedSelector) {
+		return [interceptedTarget count] >= 3;
+	}];
+	words = (NSMutableArray *)interceptor;
+
+	[words addObject:@"One"];
+	[words addObject:@"Two"];
+	[words addObject:@"Three"];
+	[words addObject:@"Four"];
+	XCTAssertTrue([words containsObject:@"Four"] == NO, @"Word [Four] should not have been added");
+}
+
 - (void)testArgumentsInterceptor
 {
 	InterceptorKitTests *interceptor = (InterceptorKitTests *)[[IKInterceptor alloc] initWithTarget:self];
 
 	[(IKInterceptor *)interceptor  interceptArguemntsForSelector:@selector(argumentsTestSelectorWithInteger:dictionary:andStruct:)
-													  withAction:^(id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList) {
+													  withAction:^BOOL(id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList) {
 														  [argumentsList replaceObjectAtIndex:0 withObject:@(100)];
 														  [argumentsList replaceObjectAtIndex:1 withObject:@{ @"key" : @"obj2" }];
 														  [argumentsList replaceObjectAtIndex:2 withObject:[NSValue valueWithRange:NSMakeRange(0, 100)]];
+														  return NO;
 													  }];
 
 	[interceptor argumentsTestSelectorWithInteger:42 dictionary:@{ @"key" : @"obj1" } andStruct:NSMakeRange(3, 9)];
@@ -159,10 +182,11 @@
 	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:someData];
 	[interceptor interceptSelector:@selector(appendString:)
 						  withMode:IKInterceptionModePreInvoke
-						 andAction:^(id interceptedTarget, SEL interceptedSelector) {
+						 andAction:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 							 NSData *data = [interceptedTarget dataUsingEncoding: NSUTF8StringEncoding];
 							 [interceptedTarget replaceCharactersInRange:NSMakeRange(0, [interceptedTarget length])
 															  withString:[data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]];
+							 return NO;
 						 }];
 	someData = (NSMutableString *)interceptor;
 	[someData appendString:@"NotBase64"];
@@ -178,8 +202,9 @@
 	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:sortableArray];
 	[interceptor interceptSelector:@selector(addObject:)
 						  withMode:IKInterceptionModePostInvoke
-						 andAction:^(id interceptedTarget, SEL interceptedSelector) {
+						 andAction:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 							 [interceptedTarget sortUsingDescriptors:@[ascendingSort]];
+							 return NO;
 						 }];
 	sortableArray = (NSMutableArray *)interceptor;
 
@@ -201,8 +226,9 @@
 
 	[interceptor interceptSelector:@selector(addObject:) withMode:IKInterceptionModeConditional condition:^BOOL(id intercerptedTarget, SEL interceptedSelector) {
 		return [intercerptedTarget count] >= 3;
-	} andAction:^(id interceptedTarget, SEL interceptedSelector) {
+	} andAction:^BOOL(id interceptedTarget, SEL interceptedSelector) {
 		[interceptedTarget removeObjectAtIndex:0];
+		return NO;
 	}];
 	words = (NSMutableArray *)interceptor;
 
@@ -220,16 +246,17 @@
 	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:objects];
 
 	[interceptor  interceptArguemntsForSelector:@selector(replaceObjectAtIndex:withObject:)
-													  withAction:^(id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList) {
-														  NSUInteger indexArgument = [[argumentsList objectAtIndex:0] unsignedIntegerValue];
-														  id objectArgument = [argumentsList objectAtIndex:1];
-														  if (![objectArgument isEqual:@"Kit"]) {
-															  [argumentsList replaceObjectAtIndex:1 withObject:@"Kit"];
-														  }
-														  while ([interceptedTarget count] < indexArgument + 1) {
-															  [interceptedTarget addObject:[NSNull null]];
-														  }
-													  }];
+									 withAction:^BOOL(id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList) {
+										 NSUInteger indexArgument = [[argumentsList objectAtIndex:0] unsignedIntegerValue];
+										 id objectArgument = [argumentsList objectAtIndex:1];
+										 if (![objectArgument isEqual:@"Kit"]) {
+											 [argumentsList replaceObjectAtIndex:1 withObject:@"Kit"];
+										 }
+										 while ([interceptedTarget count] < indexArgument + 1) {
+											 [interceptedTarget addObject:[NSNull null]];
+										 }
+										 return NO;
+									 }];
 	objects = (NSMutableArray *)interceptor;
 
 	[objects replaceObjectAtIndex:3 withObject:@"Library"];

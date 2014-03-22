@@ -18,6 +18,8 @@
 	IKArgumentsInterceptionAction _argumentsAction;
 }
 
+- (BOOL)shouldProceedWithIncocation:(NSInvocation *)invocation;
+
 @end
 
 @implementation IKInterceptionContext
@@ -52,21 +54,33 @@
 
 #pragma mark - Tasks
 
-- (void)performInterceptionWithInvocation:(NSInvocation *)invocation
+- (BOOL)performInterceptionWithInvocation:(NSInvocation *)invocation
 {
-	if (_selector != invocation.selector) return;
+	BOOL abortInvocation = NO;
 
-	if ([self isConditionalInterceptor] && _condition != nil) {
-		if (_condition(invocation.target, invocation.selector) == NO) return;
+	if (_selector != invocation.selector) return NO;
+
+	if ([self shouldProceedWithIncocation:invocation] == NO) return NO;
+
+	if (_action != nil) {
+		abortInvocation = _action(invocation.target, invocation.selector);
 	}
 
-	if (_action) {
-		_action(invocation.target, invocation.selector);
-	} else if (_argumentsAction) {
+	if (_argumentsAction != nil) {
 		NSMutableArray *arguments = [invocation argumentsList];
-		_argumentsAction(invocation.target, invocation.selector, arguments);
+		abortInvocation = _argumentsAction(invocation.target, invocation.selector, arguments);
 		[invocation setArguments:arguments];
 	}
+
+	return [self isAbortInvokeInterceptor] && abortInvocation;
+}
+
+- (BOOL)shouldProceedWithIncocation:(NSInvocation *)invocation
+{
+	if (_condition != nil && [self isConditionalInterceptor]) {
+		return _condition(invocation.target, invocation.selector);
+	}
+	return YES;
 }
 
 #pragma mark - Attributes
@@ -84,6 +98,11 @@
 - (BOOL)isConditionalInterceptor
 {
 	return (_mode & IKInterceptionModeConditional) == IKInterceptionModeConditional;
+}
+
+- (BOOL)isAbortInvokeInterceptor
+{
+	return (_mode & IKInterceptionModeAbortInvoke) == IKInterceptionModeAbortInvoke;
 }
 
 @end

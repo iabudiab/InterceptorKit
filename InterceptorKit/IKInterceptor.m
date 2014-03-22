@@ -93,6 +93,7 @@
 				andAction:(IKInterceptionAction)action
 {
 	if (mode == IKInterceptionModeConditional) mode |= IKInterceptionModePreInvoke;
+	if (mode == IKInterceptionModeAbortInvoke) mode |= IKInterceptionModePreInvoke;
 
 	IKInterceptionContext *context = [[IKInterceptionContext alloc] initWithSelector:selector
 																				mode:mode
@@ -118,7 +119,10 @@
 
 	invocation.target = _target;
 
-	[_preInvokeInterceptors makeObjectsPerformSelector:@selector(performInterceptionWithInvocation:) withObject:invocation];
+	for (IKInterceptionContext *interceptor in _preInvokeInterceptors) {
+		if ([interceptor performInterceptionWithInvocation:invocation] == YES) return;
+	}
+
 	[invocation invoke];
 	[_postInvokeInterceptors makeObjectsPerformSelector:@selector(performInterceptionWithInvocation:) withObject:invocation];
 }

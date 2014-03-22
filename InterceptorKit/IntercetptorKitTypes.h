@@ -8,11 +8,12 @@
 
 typedef enum
 {
-    IKInterceptionModePreInvoke      = 1 << 0,
-    IKInterceptionModePostInvoke     = 1 << 1,
-    IKInterceptionModeConditional    = 1 << 2
+    IKInterceptionModePreInvoke		= 1 << 0,
+    IKInterceptionModePostInvoke	= 1 << 1,
+    IKInterceptionModeConditional	= 1 << 2,
+	IKInterceptionModeAbortInvoke	= 1 << 3
 } IKInterceptionMode;
 
-typedef void (^ IKInterceptionAction) (id interceptedTarget, SEL interceptedSelector);
+typedef BOOL (^ IKInterceptionAction) (id interceptedTarget, SEL interceptedSelector);
 typedef BOOL (^ IKInterceptionCondition) (id intercerptedTarget, SEL interceptedSelector);
-typedef void (^ IKArgumentsInterceptionAction) (id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList);
+typedef BOOL (^ IKArgumentsInterceptionAction) (id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList);

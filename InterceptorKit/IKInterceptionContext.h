@@ -19,10 +19,11 @@
 - (instancetype)initWithSelector:(SEL)selector
 			 andArgumentsActions:(IKArgumentsInterceptionAction)argumentsAction;
 
-- (void)performInterceptionWithInvocation:(NSInvocation *)invocation;
+- (BOOL)performInterceptionWithInvocation:(NSInvocation *)invocation;
 
 - (BOOL)isPreInvokeInterceptor;
 - (BOOL)isPostInvokeInterceptor;
 - (BOOL)isConditionalInterceptor;
+- (BOOL)isAbortInvokeInterceptor;
 
 @end
