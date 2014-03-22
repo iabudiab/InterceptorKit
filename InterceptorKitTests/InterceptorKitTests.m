@@ -213,4 +213,27 @@
 	XCTAssertTrue([words containsObject:@"One"] == NO, @"Word [One] should have been deleted");
 }
 
+- (void)testExampleArguments
+{
+	NSMutableArray *objects = [NSMutableArray arrayWithObject:@"Interceptor"];
+
+	IKInterceptor *interceptor = [[IKInterceptor alloc] initWithTarget:objects];
+
+	[interceptor  interceptArguemntsForSelector:@selector(replaceObjectAtIndex:withObject:)
+													  withAction:^(id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList) {
+														  NSUInteger indexArgument = [[argumentsList objectAtIndex:0] unsignedIntegerValue];
+														  id objectArgument = [argumentsList objectAtIndex:1];
+														  if (![objectArgument isEqual:@"Kit"]) {
+															  [argumentsList replaceObjectAtIndex:1 withObject:@"Kit"];
+														  }
+														  while ([interceptedTarget count] < indexArgument + 1) {
+															  [interceptedTarget addObject:[NSNull null]];
+														  }
+													  }];
+	objects = (NSMutableArray *)interceptor;
+
+	[objects replaceObjectAtIndex:3 withObject:@"Library"];
+	NSLog(@"%@", objects);
+}
+
 @end
