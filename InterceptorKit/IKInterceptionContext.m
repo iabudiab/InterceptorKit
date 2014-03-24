@@ -18,7 +18,7 @@
 	IKArgumentsInterceptionAction _argumentsAction;
 }
 
-- (BOOL)shouldProceedWithIncocation:(NSInvocation *)invocation;
+- (BOOL)shouldProceedWithInterception:(NSInvocation *)invocation;
 
 @end
 
@@ -60,7 +60,7 @@
 
 	if (_selector != invocation.selector) return NO;
 
-	if ([self shouldProceedWithIncocation:invocation] == NO) return NO;
+	if ([self shouldProceedWithInterception:invocation] == NO) return NO;
 
 	if (_action != nil) {
 		abortInvocation = _action(invocation.target, invocation.selector);
@@ -75,7 +75,7 @@
 	return [self isAbortInvokeInterceptor] && abortInvocation;
 }
 
-- (BOOL)shouldProceedWithIncocation:(NSInvocation *)invocation
+- (BOOL)shouldProceedWithInterception:(NSInvocation *)invocation
 {
 	if (_condition != nil && [self isConditionalInterceptor]) {
 		return _condition(invocation.target, invocation.selector);
