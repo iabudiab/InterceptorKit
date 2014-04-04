@@ -263,4 +263,20 @@
 	NSLog(@"%@", objects);
 }
 
+- (void)testMethodInjection
+{
+	NSString *testString = @"Injected";
+
+	[[IKMethodInjector sharedInjector] interceptClass:[NSString class]
+									byInjectingAction:^BOOL(id interceptedTarget, SEL interceptedSelector, NSMutableArray *argumentsList) {
+										NSLog(@"Inside Action Block");
+										return NO;
+									}
+								 withInterceptionMode:IKInterceptionModePreInvoke
+										  forSelector:@selector(uppercaseString)];
+
+	testString = [testString uppercaseString];
+	NSLog(@"%@", testString);
+}
+
 @end

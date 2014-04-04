@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		6261C71A18D8F5A40020CA55 /* NSInvocation+InterceptorKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6261C71918D8F5A40020CA55 /* NSInvocation+InterceptorKit.m */; };
 		6261C71B18D90A920020CA55 /* NSInvocation+InterceptorKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6261C71918D8F5A40020CA55 /* NSInvocation+InterceptorKit.m */; };
+		629EEC0C18EC8692008D8F84 /* IKMethodInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 629EEC0B18EC8692008D8F84 /* IKMethodInjector.m */; };
+		629EEC0F18EC8CD1008D8F84 /* IKMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 629EEC0E18EC8CD1008D8F84 /* IKMethod.m */; };
+		62A580FD18EF455A00E4367B /* IKMethodInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 629EEC0B18EC8692008D8F84 /* IKMethodInjector.m */; };
+		62A580FE18EF455C00E4367B /* IKMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 629EEC0E18EC8CD1008D8F84 /* IKMethod.m */; };
+		62A580FF18EF46AE00E4367B /* IKMethodInjector.h in Headers */ = {isa = PBXBuildFile; fileRef = 629EEC0A18EC8692008D8F84 /* IKMethodInjector.h */; };
+		62A5810018EF46B100E4367B /* IKMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 629EEC0D18EC8CD1008D8F84 /* IKMethod.h */; };
 		62BAD9B618C3683100508D65 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BAD9B518C3683100508D65 /* Cocoa.framework */; };
 		62BAD9C018C3683100508D65 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62BAD9BE18C3683100508D65 /* InfoPlist.strings */; };
 		62BAD9CB18C3683100508D65 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BAD9CA18C3683100508D65 /* XCTest.framework */; };
@@ -58,6 +64,10 @@
 /* Begin PBXFileReference section */
 		6261C71818D8F5A40020CA55 /* NSInvocation+InterceptorKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+InterceptorKit.h"; sourceTree = "<group>"; };
 		6261C71918D8F5A40020CA55 /* NSInvocation+InterceptorKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+InterceptorKit.m"; sourceTree = "<group>"; };
+		629EEC0A18EC8692008D8F84 /* IKMethodInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMethodInjector.h; sourceTree = "<group>"; };
+		629EEC0B18EC8692008D8F84 /* IKMethodInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMethodInjector.m; sourceTree = "<group>"; };
+		629EEC0D18EC8CD1008D8F84 /* IKMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKMethod.h; sourceTree = "<group>"; };
+		629EEC0E18EC8CD1008D8F84 /* IKMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IKMethod.m; sourceTree = "<group>"; };
 		62BAD9B218C3683100508D65 /* InterceptorKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = InterceptorKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62BAD9B518C3683100508D65 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		62BAD9B818C3683100508D65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -163,6 +173,10 @@
 				62BAD9E918C376F300508D65 /* IKInterceptionContext.m */,
 				6261C71818D8F5A40020CA55 /* NSInvocation+InterceptorKit.h */,
 				6261C71918D8F5A40020CA55 /* NSInvocation+InterceptorKit.m */,
+				629EEC0A18EC8692008D8F84 /* IKMethodInjector.h */,
+				629EEC0B18EC8692008D8F84 /* IKMethodInjector.m */,
+				629EEC0D18EC8CD1008D8F84 /* IKMethod.h */,
+				629EEC0E18EC8CD1008D8F84 /* IKMethod.m */,
 				62BAD9BC18C3683100508D65 /* Supporting Files */,
 			);
 			name = "Source Code";
@@ -206,9 +220,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				62BD8D7318C4D3E0003C4C7F /* InterceptorKit.h in Headers */,
+				62A580FF18EF46AE00E4367B /* IKMethodInjector.h in Headers */,
 				62BAD9E618C371D500508D65 /* IntercetptorKitTypes.h in Headers */,
 				62BAD9E218C369E900508D65 /* IKInterceptor.h in Headers */,
 				62BAD9EA18C376F300508D65 /* IKInterceptionContext.h in Headers */,
+				62A5810018EF46B100E4367B /* IKMethod.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +341,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62A580FD18EF455A00E4367B /* IKMethodInjector.m in Sources */,
 				6261C71B18D90A920020CA55 /* NSInvocation+InterceptorKit.m in Sources */,
+				62A580FE18EF455C00E4367B /* IKMethod.m in Sources */,
 				62BAD9E318C369E900508D65 /* IKInterceptor.m in Sources */,
 				62BAD9EB18C376F300508D65 /* IKInterceptionContext.m in Sources */,
 			);
@@ -343,7 +361,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				629EEC0C18EC8692008D8F84 /* IKMethodInjector.m in Sources */,
 				6261C71A18D8F5A40020CA55 /* NSInvocation+InterceptorKit.m in Sources */,
+				629EEC0F18EC8CD1008D8F84 /* IKMethod.m in Sources */,
 				62BD8D7418C4D4AE003C4C7F /* IKInterceptor.m in Sources */,
 				62BD8D7518C4D4B0003C4C7F /* IKInterceptionContext.m in Sources */,
 			);

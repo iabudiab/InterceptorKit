@@ -8,3 +8,4 @@
 
 #import "IntercetptorKitTypes.h"
 #import "IKInterceptor.h"
+#import "IKMethodInjector.h"
